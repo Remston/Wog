@@ -6,21 +6,22 @@
             steps {
                 // Checkout the repository (e.g., from Git)
                 echo '--CLONE STAGE EXECUTION ---'
-                git branch: 'main', url: 'https://github.com/Remston/Wog.git'
+                checkout scm
+                //git branch: 'main', url: 'https://github.com/Remston/Wog.git'
             }
         }
 
         stage('Build') {
             steps {
                 echo '--BUILD STAGE EXECUTION --'
-                sh 'docker build -t wog:1.0 .'
+                sh 'docker build -t my-wog-container .'
             }
         }
 
         stage('Run') {
             steps {
                 echo '--RUN STAGE EXECUTION --'
-                sh 'docker run -d -p 8777:8777 -v $(pwd)/scores.txt:/app/score/scores.txt wog:1.0'
+                sh 'docker run -d -p 8777:8777 -v $(pwd)/scores.txt:/app/score/scores.txt my-wog-container'
             }
         }
 
@@ -41,8 +42,8 @@
         stage('Finalize') {
             steps {
                 echo '--Finalize STAGE EXECUTION --'
-                sh 'docker stop wog:1.0'
-                sh 'docker rm wog:1.0'
+                sh 'docker stop my-wog-container'
+                sh 'docker rm my-wog-container'
 
                 // sh 'docker login -u <your_dockerhub_username> -p <your_dockerhub_password>'
                 // Github security check ban push contains Login credentials
