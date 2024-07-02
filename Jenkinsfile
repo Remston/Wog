@@ -1,15 +1,22 @@
-﻿pipeline {
+pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Hello') {
             steps {
-                // Checkout the repository (e.g., from Git)
-                echo '--CLONE STAGE EXECUTION ---'
-                //git branch: 'main', url: 'https://github.com/Remston/Wog.git'
+                sh 'date'
+                script{
+                    if(ENV == "prod"){
+                        echo 'We in prod!!!'
+                    }
+                }
+                
             }
         }
-
-        
+        stage('Upload to prod') {
+            steps {
+                echo 'df'
+            }
+        }
     }
 }
