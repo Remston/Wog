@@ -30,12 +30,6 @@
                 sh '''cd app/tests/
                     python e2e.py'''
             }
-            post {
-                failure {
-                    // Fail the pipeline if tests fail
-                    error('Tests failed!')
-                }
-            }
         }
 
         stage('Finalize') {
