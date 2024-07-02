@@ -6,7 +6,6 @@
             steps {
                 // Checkout the repository (e.g., from Git)
                 echo '--CLONE STAGE EXECUTION ---'
-                checkout scm
                 //git branch: 'main', url: 'https://github.com/Remston/Wog.git'
             }
         }
